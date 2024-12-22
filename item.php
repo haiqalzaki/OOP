@@ -7,7 +7,7 @@ class Items
     private array $name = [];
     private array $quantity = [];
     private array $price = [];
-    public array $items = [];
+    protected array $items = [];
 
     // Pass user input to instantiate item object for processing / Can pass arrays separately, ie. can only pass the item name only, or quantity only, or price only if required
     public function __construct(array $itemName = [], array $itemQuantity = [], array $itemPrice = []) 
