@@ -89,6 +89,22 @@ class Items
         return $this->items;
     }
 
+    public function get_total_price(): float|null
+    {
+        if ((empty($this->quantity) || !is_array($this->quantity)) || (empty($this->price) || !is_array($this->price))) {
+            return null;
+        }
+
+        $total = 0.0;
+
+        foreach ($this->quantity as $index => $qty_value) {
+            $price_value = (float) $this->price[$index];
+            $total += $price_value * $qty_value;
+        }
+
+        return $total;
+    }
+
     // Set all elements to item array property (INTERNAL)
     private function set_items(): void
     {
@@ -168,12 +184,12 @@ class Items
             }
         }
         return true;
-    }
+    }  
 }
 
 $arr_name = ['brake pad', 'chain lube', 'oil filter'];
-$arr_quantity = [2, 3, '24'];
-$arr_price = [80, 99, '23.99'];
+$arr_quantity = [5, 5, 5];
+$arr_price = [19.99, 15.99, 10.99];
 
 try {
     $item_one = new Items($arr_name, $arr_quantity, $arr_price);
@@ -185,7 +201,8 @@ try {
     }
 
     $items = $item_one->get_items();
-    dd($items);
+    $total = $item_one->get_total_price();
+    dd($total);
 } catch (Exception $e) {
     error_log("Exception caught: ". $e->getMessage());
 }
