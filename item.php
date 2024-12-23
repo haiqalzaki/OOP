@@ -176,15 +176,15 @@ $arr_quantity = [2, 3, '24'];
 $arr_price = [80, 99, '23.99'];
 
 try {
-    $item_one = new Items($arr_name);
-    $result = $item_one->get_name_elements();
+    $item_one = new Items($arr_name, $arr_quantity, $arr_price);
+    $result = $item_one->validate_items_and_set();
     
-    if (!$result) {
+    if (!$result['status']) {
         echo "No products found. ";
         exit();
     }
 
-    $items = $item_one->get_name_elements();
+    $items = $item_one->get_items();
     dd($items);
 } catch (Exception $e) {
     error_log("Exception caught: ". $e->getMessage());
