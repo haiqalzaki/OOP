@@ -180,7 +180,7 @@ try {
     $result = $item_one->validate_items_and_set();
     
     if (!$result['status']) {
-        echo "No products found. ";
+        echo "Operation failed: ". $result['message'];
         exit();
     }
 
